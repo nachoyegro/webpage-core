@@ -1,0 +1,22 @@
+{% load static from staticfiles %}
+{% load i18n %}
+<html>
+{% block css %}
+{% endblock %}
+{% block js %}
+{% endblock %}
+
+<head>
+{% block head %}
+<title>{% block title %}{% endblock %}</title>
+{% endblock %}
+</head>
+
+{% block body %}
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+{% endblock %}
+
+</html>

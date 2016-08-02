@@ -1,0 +1,4 @@
+include LICENSE
+include README.rst
+recursive-include webpage_core/static *
+recursive-include webpage_core/templates *
