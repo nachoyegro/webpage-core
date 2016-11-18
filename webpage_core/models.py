@@ -13,13 +13,14 @@ class Page(models.Model):
     order = models.PositiveIntegerField()
     url_name = models.CharField(max_length=64)
     background = models.ImageField(blank=True, null=True, upload_to='images')
-    
+
     def __unicode__(self):
         return u'%s' % self.title
 
 class Content(models.Model):
     pages = models.ManyToManyField(Page, related_name='contents', blank=True, null=True)
     position = models.PositiveIntegerField()
+    is_global = models.BooleanField(default=False)
     objects = InheritanceManager()
 
     def get_html(self):
@@ -73,4 +74,3 @@ class ImageTextContent(SimpleImageContent):
 
     def __unicode__(self):
         return u'%s-%s' % (self.title, str(self.pages))
-
