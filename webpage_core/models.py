@@ -25,7 +25,7 @@ class Content(models.Model):
 
     def get_html(self, **kwargs):
         template = self.get_template_from_name()
-        context = Context(self.get_context(kwargs))
+        context = Context(self.get_context(**kwargs))
         return template.render(context)
 
     def get_template_from_name(self):
