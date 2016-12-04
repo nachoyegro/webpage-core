@@ -23,9 +23,9 @@ class Content(models.Model):
     is_global = models.BooleanField(default=False)
     objects = InheritanceManager()
 
-    def get_html(self):
+    def get_html(self, **kwargs):
         template = self.get_template_from_name()
-        context = Context(self.get_context())
+        context = Context(self.get_context(kwargs))
         return template.render(context)
 
     def get_template_from_name(self):
@@ -34,7 +34,7 @@ class Content(models.Model):
     def get_template_name(self):
         pass
 
-    def get_context(self):
+    def get_context(self, **kwargs):
         pass
 
 class SimpleText(Content):
@@ -44,7 +44,7 @@ class SimpleText(Content):
     def get_template_name(self):
         return 'simple_text.html'
 
-    def get_context(self):
+    def get_context(self, **kwargs):
         return {'title': self.title, 'text': self.text}
 
     def __unicode__(self):
@@ -56,7 +56,7 @@ class SimpleImageContent(Content):
     def get_template_name(self):
         return 'simple_image.html'
 
-    def get_context(self):
+    def get_context(self, **kwargs):
         return {'image': self.image}
 
     def __unicode__(self):
@@ -69,7 +69,7 @@ class ImageTextContent(SimpleImageContent):
     def get_template_name(self):
         return 'image_text.html'
 
-    def get_context(self):
+    def get_context(self, **kwargs):
         return {'title': self.title, 'text': self.text, 'image': self.image}
 
     def __unicode__(self):
