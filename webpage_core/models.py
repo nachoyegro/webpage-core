@@ -23,7 +23,7 @@ class Content(models.Model):
     is_global = models.BooleanField(default=False)
     objects = InheritanceManager()
 
-    def get_preview_html(self):
+    def get_preview_html(self,  **kwargs):
         template = self.get_template_from_name(self.get_template_preview_name())
         context = Context(self.get_context(**kwargs))
         return template.render(context)
