@@ -23,15 +23,23 @@ class Content(models.Model):
     is_global = models.BooleanField(default=False)
     objects = InheritanceManager()
 
-    def get_html(self, **kwargs):
-        template = self.get_template_from_name()
+    def get_preview_html(self):
+        template = self.get_template_from_name(self.get_template_preview_name())
         context = Context(self.get_context(**kwargs))
         return template.render(context)
 
-    def get_template_from_name(self):
-        return get_template(self.get_template_name())
+    def get_html(self, **kwargs):
+        template = self.get_template_from_name(self.get_template_name())
+        context = Context(self.get_context(**kwargs))
+        return template.render(context)
+
+    def get_template_from_name(self, template_name):
+        return get_template(template_name)
 
     def get_template_name(self):
+        pass
+
+    def get_template_preview_name(self):
         pass
 
     def get_context(self, **kwargs):
